@@ -1,0 +1,70 @@
+[DP83820]
+Type = NDIS
+Title = "National Semiconductor DP83820 10/100/1000 Mac PCI Adapter"
+Version = 2.01
+DriverName = DP82X$
+Xports = NETBEUI, LANDD
+
+[FILE]
+Name = DP83820.OS2
+Path = IBMCOM\MACS
+
+
+[SLOT]
+display = "Slot Number of the Adapter"
+type = decimal
+;default = "0"
+optional = yes
+range = 0-7
+help = "SLOT=n, n=0..7, specifies the PCI SLOT index number 
+to look for DP83820 adapter. PCI SLOT index starts 0. Default is 0. 
+This isn't required unless there are multiple DP83820 adapters."
+
+
+[TXQUEUE]
+display = "Maximum TX queue count"
+type = decimal
+;default = 3
+optional = yes
+range = 1-20
+help = "TXQUEUE=n, n=1..20, specifies the number of transmits 
+which can be queued up by the driver when the TxFIFO is full or 
+the adapter is otherwise busy. The default value is 3, which should 
+be sufficient for most cases."
+
+
+[RXQUEUE]
+display = "Maximum RX queue count"
+type = decimal
+;default = 8
+optional = yes
+range = 2-40
+help = "RXQUEUE=n, n=2..40, specifies the number of recieves 
+which can be queued up by the driver. The default value is 8."
+
+
+[MEDIATYPE]
+display = "Media Type"
+type = string
+strlength = 10
+default = AUTO
+optional = yes
+set = AUTO,UTP,UTPFULL,FAST,FASTFULL,GIGA,GIGAFULL
+help = "MEDIATYPE specifies the media type. GIGA and GIGAFULL should not 
+be specified because 1000MBASE-T manual select is out of GMII specification. 
+Default is AUTO, which is convenient for most cases."
+
+
+[NETADDRESS]
+tag = NETADDRESS
+display = "Network adapter address"
+type = hexstring
+Strlength = 12
+optional = yes
+editable = yes
+help = "NETADDRESS allows the user to configure the network address 
+of the adapter, rather than using the one in EEProm.  If not specified 
+the address on the adapter will be used. 
+If specified, the right hand side must be exactly 12 hex ASCII characters 
+which will be converted to the network address."
+

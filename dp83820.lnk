@@ -1,0 +1,69 @@
+=====================================================================
+National Semiconductor DP83820 Gig Mac NDIS 2.0.1 OS/2 driver 1.05.06
+=====================================================================
+
+1.Introduction
+
+The source code of DP83815 DOS driver is available 
+on the National Semiconductor web site, URL:http://www.national.com/.
+I modified it slightly for OS/2, and transformed to DP82820 driver.
+This code is made with MS-MASM 6.0 and MS-C 6.0.
+
+Included files are:
+dp83820.os2	NDIS 2.0.1 MAC driver
+dp83820.nif	Network Information File
+dp83820.sym	Symbol Map file
+dp83820.lnk	Document (this file)
+
+
+2.No Warranty
+
+This code is provided 'AS IS' and any warranties are disclaimed.
+
+
+3.Restrictions
+
+- TBI is not supported.
+- VLAN/IP function is not supported.
+- Priority queue is not supported.
+- Asymmetry flow control (pause) is not supported.
+- PCI commands, Memory write and cache invalidate, Memory Read multiple,
+   Memory read line, cannot be disabled, even if cache line size 
+   in PCI configuration space is zero.
+- Driver internal flags may be crashed on SMP environment.
+
+
+4.History
+
+ver.1.05.06 - 11/17, 2002.
+  Bugfix: Force Half duplex select in General request SetPacketFilter
+    was removed.(This code has caused 1000BASE-T malfunction.)
+  General request SetLookahead was modified.(Do nothing since 
+    ReceiveLookahead is never used.)
+  The bizzare code ver.1.05.05 (Force TBI) was removed.
+
+ver.1.05.05 - 9/26, 2002.
+  1000BASE-T: Force TBI mode before setting GMII mode. bizarre... 
+
+ver.1.05.04 - 6/25, 2002.
+  Bugfix: CRC32 calculation was corrected.(MS-C 6.0 bug)
+    Now, H/W multicast filter works. S/W filter was removed.
+  Interrupt handle was slightly modified, and Context hook handle
+    for Reset and InterruptRequest was removed.(backward)
+
+ver.1.05.03 - 4/21, 2002.
+  Interrupt handle was rewritten.
+  ReceiveChain is used instead of ReceiveLookAhead.
+  Multicast addresses can be accepted.(H/W receives all multicast frames.)
+  Software multicast filter.(Bug of hash table creation remains.)
+
+ver.1.05.02 - 3/21, 2002.
+  Initial release.
+
+
+5.Contact
+
+Email to Yanagihara Nobuyuki:
+ <VYL00513@nifty.ne.jp>
+
+(National Semiconductor has the COPYRIGHT, but NEVER annoy them.)
